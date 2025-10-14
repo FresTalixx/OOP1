@@ -1,0 +1,45 @@
+#include "Triangle.h"
+#include <iostream>
+
+using namespace std;
+
+Triangle::Triangle() {
+	point1 = Point(0, 0);
+	point2 = Point(2, 2);
+	point3 = Point(0, 4);
+}
+
+Triangle::Triangle(Point point1, Point point2, Point point3) {
+	this->point1 = point1;
+	this->point2 = point2;
+	this->point3 = point3;
+}
+
+float Triangle::calculatePerimeter() {
+	return point1.findDistanceBetween2Points(point2) +
+		point2.findDistanceBetween2Points(point3) +
+		point3.findDistanceBetween2Points(point1);
+}
+
+float Triangle::calculateSquare() {
+	float a = point1.findDistanceBetween2Points(point2);
+	float b = point2.findDistanceBetween2Points(point3);
+	float c = point3.findDistanceBetween2Points(point1);
+	float p = (a + b + c) / 2;
+	return sqrt(p * (p - a) * (p - b) * (p - c));
+}
+
+void Triangle::print() const {
+	cout << "Triangle: " << endl;
+	cout << "Point 1: " << point1.getX() << " " << point1.getY() << " " << endl;
+	cout << "Point 2: " << point2.getX() << " " << point2.getY() << " " << endl;
+	cout << "Point 3: " << point3.getX() << " " << point3.getY() << " " << endl;
+}
+
+Shape* Triangle::inputFromConsole() {
+	Point point1 = fromConsole("first");
+	Point point2 = fromConsole("second");
+	Point point3 = fromConsole("third");
+	return new Triangle(point1, point2, point3);
+}
+
