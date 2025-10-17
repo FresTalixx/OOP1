@@ -56,12 +56,13 @@ void ShapeManager::printShapeArray() const {
 	}
 }
 
-Shape* ShapeManager::findShapeWithMixSquare() {
-	float smallestSquare = 0;
+Shape* ShapeManager::findShapeWithMinSquare() {
+	float smallestSquare = shapes[0]->calculateSquare();
 	Shape* smallestSquareShape = shapes[0];
-	for (int i = 0; i < size; ++i) {
+	for (int i = 1; i < size; ++i) {
 		if (shapes[i]->calculateSquare() < smallestSquare) {
 			smallestSquareShape = shapes[i];
+			smallestSquare = shapes[i]->calculateSquare();
 		}
 	}
 
@@ -69,11 +70,12 @@ Shape* ShapeManager::findShapeWithMixSquare() {
 }
 
 Shape* ShapeManager::findShapeWithMaxSquare() {
-	float biggestSquare = 0;
+	float biggestSquare = shapes[0]->calculateSquare();
 	Shape* biggestSquareShape = shapes[0];
 	for (int i = 0; i < size; ++i) {
 		if (shapes[i]->calculateSquare() > biggestSquare) {
 			biggestSquareShape = shapes[i];
+			biggestSquare = shapes[i]->calculateSquare();
 		}
 	}
 
@@ -81,13 +83,21 @@ Shape* ShapeManager::findShapeWithMaxSquare() {
 }
 
 Shape* ShapeManager::findShapeWithMaxPerimeter() {
-	float biggestPerimeter = 0;
+	float biggestPerimeter = shapes[0]->calculatePerimeter();
 	Shape* biggestPerimeterShape = shapes[0];
 	for (int i = 0; i < size; ++i) {
 		if (shapes[i]->calculateSquare() > biggestPerimeter) {
 			biggestPerimeterShape = shapes[i];
+			biggestPerimeter = shapes[0]->calculatePerimeter();
 		}
 	}
 
 	return biggestPerimeterShape;
+}
+
+void ShapeManager::writeToFile(string filename) {
+	ofstream file(filename);
+	if (file.is_open()) {
+
+	}
 }

@@ -32,9 +32,13 @@ public:
 	Shape** deleteShape(int number);
 
 	void printShapeArray() const;
+
+
 	Shape* findShapeWithMaxSquare();
-	Shape* findShapeWithMixSquare();
+	Shape* findShapeWithMinSquare();
 	Shape* findShapeWithMaxPerimeter();
+
+	
 
 	~ShapeManager();
 };

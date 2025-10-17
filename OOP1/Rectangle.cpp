@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "Rectangle.h"
 
 using namespace std;
@@ -41,4 +42,32 @@ Shape* MyRectangle::inputFromConsole() {
 	cout << "Enter right top point (x y): ";
 	cin >> rightX >> rightY;
 	return new MyRectangle(leftX, leftY, rightX, rightY);
+}
+
+void MyRectangle::writeToFile(string filename) {
+	ofstream file(filename, ios::app); 
+	if (file.is_open()) {
+		file << "Rectangle" << endl;
+		file << leftX << " ";
+		file << leftY << " ";
+		file << rightX << " ";
+		file << rightY << " ";
+		file << "\n";
+
+	}
+}
+Shape* MyRectangle::loadFromFile(string filename) {
+	ifstream file(filename);
+
+	string type;
+	while (file >> type) {
+		if (type == "Rectangle") {
+			float lx, ly, rx, ry;
+			file >> lx >> ly >> rx >> ry;
+			return new MyRectangle(lx, ly, rx, ry);
+		}
+	}
+
+	return nullptr; // No rectangle found
+	
 }

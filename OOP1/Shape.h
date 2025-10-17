@@ -23,5 +23,8 @@ public:
 
 	virtual float calculatePerimeter() = 0;
 
+	virtual void writeToFile(string filename) = 0;
+	virtual Shape* loadFromFile(string filename) = 0;
+
 	virtual Shape* inputFromConsole() = 0;
 };

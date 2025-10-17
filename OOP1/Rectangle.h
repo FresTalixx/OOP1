@@ -60,4 +60,7 @@ public:
 	void print() const override;
 
 	Shape* inputFromConsole();
+
+	virtual void writeToFile(string filename);
+	virtual Shape* loadFromFile(string filename);
 };

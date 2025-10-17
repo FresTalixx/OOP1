@@ -17,19 +17,23 @@ int calculateFileOffsetY(string filename) {
 	return count + 1; // for correct shifting
 }
 
-Shape* selectShapeType() {
-    Shape* newShape = nullptr;
-    int shapeType;
+void printTypeMenu() {
     cout << "Choose shape type:\n";
     cout << "1. Circle\n";
     cout << "2. Rectangle\n";
     cout << "3. Square\n";
     cout << "4. Triangle\n";
-    cin >> shapeType;
+}
+
+Shape* selectShapeType() {
+    Shape* newShape = nullptr;
+    int shapeType;
 
     bool isIncorrect = true;
 
-    while (isIncorrect)
+    while (isIncorrect) {
+        printTypeMenu();
+        cin >> shapeType;
 
         switch (shapeType) {
         case 1:
@@ -52,6 +56,8 @@ Shape* selectShapeType() {
             cout << "Invalid type!\n";
             continue;
         }
+    }
+        
 
     return newShape;
 }
