@@ -1,35 +1,31 @@
 #include "Square.h"
 
 Square::Square() {
-	leftX = 0;
-	leftY = 0;
-	rightX = 2;
-	rightY = 2;
+	left = Point(0, 0);
+	right = Point(2, 3);
 }
 
-Square::Square(float leftX, float leftY, float rightX, float rightY) {
-	this->leftX = leftX;
-	this->leftY = leftY;
-	this->rightX = rightX;
-	this->rightY = rightY;
+Square::Square(Point left, Point right) {
+	this->left = left;
+	this->right = right;
 }
 
 float Square::calculatePerimeter() {
-	float side = rightY - leftY;
+	float side = right.getY() - left.getY();
 	return 4 * side;
 }
 
 float Square::calculateSquare() {
-	float side = rightY - leftY;
+	float side = right.getY() - left.getY();
 	return side * side;
 }
 
 void Square::print() const {
 	cout << "Square: ";
-	cout << "Left Bottom: " << leftX << " " << leftY << " ";
-	cout << "Left Top: " << leftX << " " << rightY << " " << endl;
-	cout << "Right Top: " << rightX << " " << rightY << " ";
-	cout << "Right Bottom: " << rightX << " " << leftY << " " << endl;
+	cout << "Left Bottom: " << left.getX() << " " << left.getY() << " " << endl;
+	cout << "Left Top: " << left.getX() << " " << right.getY() << " " << endl;
+	cout << "Right Top: " << right.getX() << " " << right.getY() << " " << endl;
+	cout << "Right Bottom: " << right.getX() << " " << left.getY() << " " << endl;
 }
 
 Shape* Square::inputFromConsole() {
@@ -38,5 +34,25 @@ Shape* Square::inputFromConsole() {
 	cin >> leftX >> leftY;
 	cout << "Enter right top point (x y): ";
 	cin >> rightX >> rightY;
-	return new Square(leftX, leftY, rightX, rightY);
+	return new Square(Point(leftX, leftY), Point(rightX, rightY));
+}
+
+void Square::writeToFile(string filename) {
+	ofstream file(filename, ios::app);
+	if (file.is_open()) {
+		file << "Square" << endl;
+		file << left.getX() << " ";
+		file << left.getY() << " ";
+		file << right.getX() << " ";
+		file << right.getY() << " ";
+		file << "\n";
+
+	}
+}
+
+Shape* Square::loadFromFile(ifstream& file) {
+	float lx, ly, rx, ry;
+	file >> lx >> ly >> rx >> ry;
+	return new Square(Point(lx, ly), Point(rx, ry));
+
 }

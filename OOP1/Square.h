@@ -6,15 +6,13 @@ using namespace std;
 
 class Square : public Shape {
 protected:
-	float leftX;
-	float leftY;
-	float rightX;
-	float rightY;
+	Point left;
+	Point right;
 
 public:
 	Square();
 
-	Square(float leftX, float leftY, float rightX, float rightY);
+	Square(Point left, Point right);
 
 	float calculatePerimeter();
 
@@ -24,5 +22,6 @@ public:
 
 	Shape* inputFromConsole();
 
-
+	void writeToFile(string filename);
+	Shape* loadFromFile(ifstream& file);
 };

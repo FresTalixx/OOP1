@@ -3,6 +3,11 @@
 #include <iostream>
 #include <fstream>
 
+#include "Circle.h"
+#include "Rectangle.h"
+#include "Square.h"
+#include "Triangle.h"
+
 using namespace std;
 
 ShapeManager::ShapeManager() {
@@ -11,7 +16,7 @@ ShapeManager::ShapeManager() {
 }
 
 ShapeManager::ShapeManager(string filename) {
-	//loadFromFile();
+	loadFromFile(filename);
 }
 
 ShapeManager::~ShapeManager() {
@@ -21,18 +26,21 @@ ShapeManager::~ShapeManager() {
 	delete[] shapes;
 }
 
-Shape** ShapeManager::addShape(Shape* newShape) {
+void ShapeManager::addShape(Shape* newShape) {
 	Shape** newShapes = new Shape * [size + 1];
 	for (int i = 0; i < size; i++) {
 		newShapes[i] = shapes[i];
 	}
 	newShapes[size] = newShape;
-	size++;
 	delete[] shapes;
-	return newShapes;
+	shapes = newShapes;
+	size++;
 }
 
-Shape** ShapeManager::deleteShape(int number) {
+
+void ShapeManager::deleteShape(int number) {
+	delete shapes[number];
+
 	Shape** newShapes = new Shape * [size - 1];
 	int j = 0;
 	for (int i = 0; i < size; i++) {
@@ -43,9 +51,9 @@ Shape** ShapeManager::deleteShape(int number) {
 		newShapes[i - j] = shapes[i];
 	}
 
-	size--;
 	delete[] shapes;
-	return newShapes;
+	shapes = newShapes;
+	size--;
 }
 
 void ShapeManager::printShapeArray() const {
@@ -86,7 +94,7 @@ Shape* ShapeManager::findShapeWithMaxPerimeter() {
 	float biggestPerimeter = shapes[0]->calculatePerimeter();
 	Shape* biggestPerimeterShape = shapes[0];
 	for (int i = 0; i < size; ++i) {
-		if (shapes[i]->calculateSquare() > biggestPerimeter) {
+		if (shapes[i]->calculatePerimeter() > biggestPerimeter) {
 			biggestPerimeterShape = shapes[i];
 			biggestPerimeter = shapes[0]->calculatePerimeter();
 		}
@@ -96,8 +104,43 @@ Shape* ShapeManager::findShapeWithMaxPerimeter() {
 }
 
 void ShapeManager::writeToFile(string filename) {
-	ofstream file(filename);
-	if (file.is_open()) {
-
+	ofstream outFile(filename, ios::app);
+	if (outFile.is_open()) {
+		for (int i = 0; i < size; ++i) {
+			shapes[i]->writeToFile(filename);
+		}
 	}
+
+	outFile.close();
 }
+
+void ShapeManager::loadFromFile(string filename) {
+	ifstream file(filename);
+	if (!file.is_open()) {
+		cerr << "Error: cannot open file for reading.\n";
+		return;
+	}
+
+	// clear old data
+	for (int i = 0; i < size; ++i)
+		delete shapes[i];
+	delete[] shapes;
+	shapes = nullptr;
+	size = 0;
+
+	// write new shapes
+	string type;
+	while (file >> type) {
+		Shape* shape = nullptr;
+
+		if (type == "Circle") shape = Circle().loadFromFile(file);
+		else if (type == "Rectangle") shape = MyRectangle().loadFromFile(file);
+		else if (type == "Square") shape = Square().loadFromFile(file);
+		else if (type == "Triangle") shape = Triangle().loadFromFile(file);
+
+		if (shape) addShape(shape);
+	}
+
+	file.close();
+}
+

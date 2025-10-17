@@ -14,19 +14,17 @@
 #include "keyboardMenuControll.h"
 #include "helpers.h"
 
+#define FILENAME "shapes.txt"
+
 using namespace std;
 
 
 
 int main()
 {
-	int shapeSize = 3;
-	Shape** shapes =  new Shape*[shapeSize];
+	int shapeSize = 0;
+	Shape** shapes =  nullptr;
 	const int menuSize = 9;
-
-	shapes[0] = new MyRectangle();
-	shapes[1] = new Circle();
-	shapes[2] = new Triangle();
 
 	ShapeManager manager;
 	manager.setShapes(shapes);
@@ -45,16 +43,18 @@ int main()
 	};
 
 	Shape* newShape = nullptr;
-	Shape* maxSquareShape = manager.findShapeWithMaxSquare();
-	Shape* minSquareShape = manager.findShapeWithMinSquare();
-	Shape* maxPerimeterShape = manager.findShapeWithMaxPerimeter();
+	Shape* maxSquareShape;
+	Shape* minSquareShape;
+	Shape* maxPerimeterShape;
 
-	while (true) {
+	bool running = true;
+
+	while (running) {
 		system("cls");
 		int choice = menuControl(menu, menuSize);
 
 		SetCursorPosition(0, 11);
-
+		
 		
 		int deleteIndex;
 
@@ -66,7 +66,7 @@ int main()
 			newShape = selectShapeType();
 			newShape = newShape->inputFromConsole();
 			ShowConsoleCursor(false);
-			manager.setShapes(manager.addShape(newShape));
+			manager.addShape(newShape);
 
 			break;
 		case 2:
@@ -77,7 +77,7 @@ int main()
 			cout << "Enter an index of shape to delete"; cin >> deleteIndex;
 			ShowConsoleCursor(false);
 
-			manager.setShapes(manager.deleteShape(deleteIndex - 1)); // proper offset
+			manager.deleteShape(deleteIndex - 1); // proper offset
 			break;
 		case 3:
 			manager.printShapeArray();
@@ -87,6 +87,7 @@ int main()
 			ShowConsoleCursor(false);
 			break;
 		case 4:
+			maxSquareShape = manager.findShapeWithMaxSquare();
 			maxSquareShape->print();
 
 			ShowConsoleCursor(true);
@@ -94,6 +95,7 @@ int main()
 			ShowConsoleCursor(false);
 			break;
 		case 5:
+			maxPerimeterShape = manager.findShapeWithMaxPerimeter();
 			maxPerimeterShape->print();
 
 			ShowConsoleCursor(true);
@@ -102,21 +104,31 @@ int main()
 			break;
 
 		case 6:
+			minSquareShape = manager.findShapeWithMinSquare();
 			minSquareShape->print();
 
 			ShowConsoleCursor(true);
 			cin.get();
 			ShowConsoleCursor(false);
 			break;
+		case 7:
+			manager.writeToFile(FILENAME);
+			break;
+		case 8:
+			manager.loadFromFile(FILENAME);
+			break;
+		case 9:
+			running = false;
+			break;
 		}
+		
+
+		
+		
 		
 	}
 
-	
 
-	for (int i = 0; i < shapeSize; ++i) {
-		delete[] shapes[i];
-	}
 	
 		
 

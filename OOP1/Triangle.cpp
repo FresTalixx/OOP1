@@ -43,3 +43,22 @@ Shape* Triangle::inputFromConsole() {
 	return new Triangle(point1, point2, point3);
 }
 
+void Triangle::writeToFile(string filename) {
+	ofstream file(filename, ios::app);
+	if (file.is_open()) {
+		file << "Triangle" << endl;
+		file << point1.getX() << " ";
+		file << point1.getY() << " ";
+		file << point2.getX() << " ";
+		file << point2.getY() << " ";
+		file << point3.getX() << " ";
+		file << point3.getY() << " ";
+		file << "\n";
+
+	}
+}
+Shape* Triangle::loadFromFile(ifstream& file) {
+	float p1x, p1y, p2x, p2y, p3x, p3y;
+	file >> p1x >> p1y >> p2x >> p2y >> p3x >> p3y;
+	return new Triangle(Point(p1x, p1y), Point(p2x, p2y), Point(p3x, p3y));
+}

@@ -30,3 +30,21 @@ Shape* Circle::inputFromConsole() {
 	return new Circle(centerPoint, circlePoint);
 }
 
+
+void Circle::writeToFile(string filename) {
+	ofstream file(filename, ios::app);
+	if (file.is_open()) {
+		file << "Circle" << endl;
+		file << centerPoint.getX() << " ";
+		file << centerPoint.getY() << " ";
+		file << circlePoint.getX() << " ";
+		file << circlePoint.getY() << " ";
+		file << "\n";
+
+	}
+}
+Shape* Circle::loadFromFile(ifstream& file) {
+	float centerX, centerY, circleX, circleY;
+	file >> centerX >> centerY >> circleX >> circleY;
+	return new Circle(Point(centerX, centerY), Point(circleX, circleY));
+}

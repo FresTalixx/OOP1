@@ -28,8 +28,8 @@ public:
 	ShapeManager();
 	ShapeManager(string filename);
 
-	Shape** addShape(Shape* newShape);
-	Shape** deleteShape(int number);
+	void addShape(Shape* newShape);
+	void deleteShape(int number);
 
 	void printShapeArray() const;
 
@@ -38,7 +38,8 @@ public:
 	Shape* findShapeWithMinSquare();
 	Shape* findShapeWithMaxPerimeter();
 
-	
+	void writeToFile(string filename);
+	void loadFromFile(string filename);
 
 	~ShapeManager();
 };

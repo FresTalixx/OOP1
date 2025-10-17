@@ -6,51 +6,35 @@ using namespace std;
 
 class MyRectangle : public Shape {
 protected:
-	float leftX;
-	float rightX;
-	float rightY;
-	float leftY;
+	Point left;
+	Point right;
 
 
 public:
 
-	float getLeftX() const {
-		return this->leftX;
+	Point getRight() const {
+		return right;
 	}
 
-	float getLeftY() const {
-		return this->leftY;
-	}
-
-	float getRightX() const {
-		return this->rightX;
-	}
-
-	float getRightY() const {
-		return this->rightY;
+	Point getLeft() const {
+		return left;
 	}
 
 
-	void setLeftX(float value) {
-		this->leftX = value;
+	void setLeft(float x, float y) {
+		left.setX(x);
+		left.setY(y);
 	}
 
-	void setLeftY(float value) {
-		this->leftY = value;
-	}
-
-	void getRightX(float value) {
-		this->rightX = value;
-	}
-
-	void getRightY(float value) {
-		this->rightY = value;
+	void setRight(float x, float y) {
+		right.setX(x);
+		right.setY(y);
 	}
 
 
 	MyRectangle();
 
-	MyRectangle(float leftX, float leftY, float rightX, float rightY);
+	MyRectangle(Point X, Point Y);
 
 
 	float calculatePerimeter();
@@ -62,5 +46,5 @@ public:
 	Shape* inputFromConsole();
 
 	virtual void writeToFile(string filename);
-	virtual Shape* loadFromFile(string filename);
+	virtual Shape* loadFromFile(ifstream& file);
 };

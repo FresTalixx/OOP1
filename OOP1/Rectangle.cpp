@@ -5,33 +5,29 @@
 using namespace std;
 
 MyRectangle::MyRectangle() {
-	leftX = 0;
-	leftY = 0;
-	rightX = 3;
-	rightY = 2;
+	left = Point(0, 0);
+	right = Point(2, 3);
 }
 
-MyRectangle::MyRectangle(float leftX, float leftY, float rightX, float rightY) {
-	this->leftX = leftX;
-	this->leftY = leftY;
-	this->rightX = rightX;
-	this->rightY = rightY;
+MyRectangle::MyRectangle(Point left, Point right) {
+	this->left = left;
+	this->right = right;
 }
 
 float MyRectangle::calculateSquare() {
-	return (rightY - leftY) * (rightX - leftX);
+	return (right.getY() - left.getY()) * (right.getX() - left.getX());
 }
 
 float MyRectangle::calculatePerimeter() {
-	return 2 * (rightY - leftY + rightX - leftX);
+	return 2 * (right.getY() - left.getY() + right.getX() - left.getX());
 }
 
 void MyRectangle::print() const {
 	cout << "Rectangle: " << endl;
-	cout << "Left Bottom: " << leftX << " " << leftY << " " << endl;
-	cout << "Left Top: " << leftX << " " << rightY << " " << endl;
-	cout << "Right Top: " << rightX << " " << rightY << " " << endl;
-	cout << "Right Bottom: " << rightX << " " << leftY << " " << endl;
+	cout << "Left Bottom: " << left.getX() << " " << left.getY() << " " << endl;
+	cout << "Left Top: " << left.getX() << " " << right.getY() << " " << endl;
+	cout << "Right Top: " << right.getX() << " " << right.getY() << " " << endl;
+	cout << "Right Bottom: " << right.getX() << " " << left.getY() << " " << endl;
 
 }
 
@@ -41,33 +37,24 @@ Shape* MyRectangle::inputFromConsole() {
 	cin >> leftX >> leftY;
 	cout << "Enter right top point (x y): ";
 	cin >> rightX >> rightY;
-	return new MyRectangle(leftX, leftY, rightX, rightY);
+	return new MyRectangle(Point(leftX, leftY), Point(rightX, rightY));
 }
 
 void MyRectangle::writeToFile(string filename) {
 	ofstream file(filename, ios::app); 
 	if (file.is_open()) {
 		file << "Rectangle" << endl;
-		file << leftX << " ";
-		file << leftY << " ";
-		file << rightX << " ";
-		file << rightY << " ";
+		file << left.getX() << " ";
+		file << left.getY() << " ";
+		file << right.getX() << " ";
+		file << right.getY() << " ";
 		file << "\n";
 
 	}
 }
-Shape* MyRectangle::loadFromFile(string filename) {
-	ifstream file(filename);
+Shape* MyRectangle::loadFromFile(ifstream& file) {
+	float lx, ly, rx, ry;
+	file >> lx >> ly >> rx >> ry;
+	return new MyRectangle(Point(lx, ly), Point(rx, ry));
 
-	string type;
-	while (file >> type) {
-		if (type == "Rectangle") {
-			float lx, ly, rx, ry;
-			file >> lx >> ly >> rx >> ry;
-			return new MyRectangle(lx, ly, rx, ry);
-		}
-	}
-
-	return nullptr; // No rectangle found
-	
 }

@@ -21,4 +21,8 @@ public:
 	void print() const;
 
 	Shape* inputFromConsole();
+
+
+	void writeToFile(string filename);
+	Shape* loadFromFile(ifstream& file);
 };
