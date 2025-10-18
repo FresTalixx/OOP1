@@ -18,17 +18,15 @@
 
 using namespace std;
 
-
-
 int main()
 {
-	int shapeSize = 0;
-	Shape** shapes =  nullptr;
-	const int menuSize = 9;
+	//int shapeSize = 0;
+	//Shape** shapes =  nullptr;
+	const int menuSize = 10;
 
 	ShapeManager manager;
-	manager.setShapes(shapes);
-	manager.setShapesSize(shapeSize);
+	/*manager.setShapes(shapes);
+	manager.setShapesSize(shapeSize);*/
 
 	const char* menu[menuSize]{
 		"Add shape",
@@ -39,6 +37,7 @@ int main()
 		"Look for shape with the smallest square",
 		"Save to file",
 		"Load from file",
+		"Shapes info",
 		"Exit"
 	};
 
@@ -72,9 +71,9 @@ int main()
 		case 2:
 			manager.printShapeArray();
 
-			SetCursorPosition(15, 11 + manager.getShapesSize() + 2); // valid offset
+			SetCursorPosition(15, 16); // valid offset
 			ShowConsoleCursor(true);
-			cout << "Enter an index of shape to delete"; cin >> deleteIndex;
+			cout << "Enter an index of shape to delete: "; cin >> deleteIndex;
 			ShowConsoleCursor(false);
 
 			manager.deleteShape(deleteIndex - 1); // proper offset
@@ -118,6 +117,8 @@ int main()
 			manager.loadFromFile(FILENAME);
 			break;
 		case 9:
+			cout << "Total shapes created: " << ShapeManager::getTotalShapesCreated();
+		case 10:
 			running = false;
 			break;
 		}

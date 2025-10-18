@@ -35,6 +35,7 @@ void ShapeManager::addShape(Shape* newShape) {
 	delete[] shapes;
 	shapes = newShapes;
 	size++;
+	ShapeManager::totalShapesCreated++;
 }
 
 

@@ -6,24 +6,13 @@ class ShapeManager {
 private:
 	Shape** shapes;
 	int size;
+	static int totalShapesCreated;
+	static int totalShapesDeleted;
 
 public:
-	Shape** getShapes() const {
-		return shapes;
+	static int getTotalShapesCreated() {
+		return ShapeManager::totalShapesCreated;
 	}
-
-	int getShapesSize() const {
-		return size;
-	}
-
-	void setShapes(Shape** shapes) {
-		this->shapes = shapes;
-	}
-
-	void setShapesSize(int size) {
-		this->size = size;
-	}
-
 
 	ShapeManager();
 	ShapeManager(string filename);
@@ -43,5 +32,8 @@ public:
 
 	~ShapeManager();
 };
+
+int ShapeManager::totalShapesCreated = 0;
+int ShapeManager::totalShapesDeleted = 0;
 
 
