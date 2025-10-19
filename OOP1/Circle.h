@@ -25,4 +25,13 @@ public:
 
 	void writeToFile(string filename);
 	Shape* loadFromFile(ifstream& file);
+
+	string getType() const {
+		return "Circle";
+	}
+
+	Shape* clone() override {
+		return new Circle(*this);
+	}
 };
+

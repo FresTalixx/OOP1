@@ -9,19 +9,40 @@ private:
 	static int totalShapesCreated;
 	static int totalShapesDeleted;
 
+	static int circlesDeleted;
+	static int rectanglesDeleted;
+	static int triangleDeleted;
+	static int squaresDeleted;
+
 public:
+
 	static int getTotalShapesCreated() {
 		return ShapeManager::totalShapesCreated;
 	}
 
+	static int getCirclesDeleted() {
+		return ShapeManager::circlesDeleted;
+	}
+	static int getRectanglesDeleted() {
+		return ShapeManager::rectanglesDeleted;
+	}
+	static int getTrianglesDeleted() {
+		return ShapeManager::triangleDeleted;
+	}
+	static int getSquaresDeleted() {
+		return ShapeManager::squaresDeleted;
+	}
+
 	ShapeManager();
 	ShapeManager(string filename);
+	ShapeManager(const ShapeManager& other);
 
 	void addShape(Shape* newShape);
 	void deleteShape(int number);
 
 	void printShapeArray() const;
 
+	static void getDeletedShapesStatistics(Shape* shape);
 
 	Shape* findShapeWithMaxSquare();
 	Shape* findShapeWithMinSquare();
@@ -33,7 +54,6 @@ public:
 	~ShapeManager();
 };
 
-int ShapeManager::totalShapesCreated = 0;
-int ShapeManager::totalShapesDeleted = 0;
+
 
 

@@ -47,4 +47,12 @@ public:
 
 	virtual void writeToFile(string filename);
 	virtual Shape* loadFromFile(ifstream& file);
+
+	string getType() const {
+		return "Rectangle";
+	}
+
+	Shape* clone() override {
+		return new MyRectangle(*this);
+	}
 };

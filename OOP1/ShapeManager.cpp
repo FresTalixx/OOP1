@@ -26,6 +26,15 @@ ShapeManager::~ShapeManager() {
 	delete[] shapes;
 }
 
+ShapeManager::ShapeManager(const ShapeManager& other) {
+	this->size = other.size;
+	Shape** newShapes = new Shape * [size];
+
+	for (int i = 0; i < size; ++i) {
+		newShapes[i] = other.shapes[i]->clone();
+	}
+}
+
 void ShapeManager::addShape(Shape* newShape) {
 	Shape** newShapes = new Shape * [size + 1];
 	for (int i = 0; i < size; i++) {
@@ -40,6 +49,7 @@ void ShapeManager::addShape(Shape* newShape) {
 
 
 void ShapeManager::deleteShape(int number) {
+	ShapeManager::getDeletedShapesStatistics(shapes[number]);
 	delete shapes[number];
 
 	Shape** newShapes = new Shape * [size - 1];
@@ -97,7 +107,7 @@ Shape* ShapeManager::findShapeWithMaxPerimeter() {
 	for (int i = 0; i < size; ++i) {
 		if (shapes[i]->calculatePerimeter() > biggestPerimeter) {
 			biggestPerimeterShape = shapes[i];
-			biggestPerimeter = shapes[0]->calculatePerimeter();
+			biggestPerimeter = shapes[i]->calculatePerimeter();
 		}
 	}
 
@@ -144,4 +154,19 @@ void ShapeManager::loadFromFile(string filename) {
 
 	file.close();
 }
+
+void ShapeManager::getDeletedShapesStatistics(Shape* shape) {
+	string tempShape = shape->getType();
+	if (tempShape == "Circle") ShapeManager::circlesDeleted++;
+	else if (tempShape == "Rectangle") ShapeManager::rectanglesDeleted++;
+	else if (tempShape == "Square") ShapeManager::squaresDeleted++;
+	else if (tempShape == "Triangle") ShapeManager::triangleDeleted++;
+}
+
+int ShapeManager::totalShapesCreated = 0;
+int ShapeManager::totalShapesDeleted = 0;
+int ShapeManager::circlesDeleted = 0;
+int ShapeManager::rectanglesDeleted = 0;
+int ShapeManager::triangleDeleted = 0;
+int ShapeManager::squaresDeleted = 0;
 

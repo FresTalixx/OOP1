@@ -26,4 +26,12 @@ public:
 
 	void writeToFile(string filename);
 	Shape* loadFromFile(ifstream& file);
+
+	string getType() const {
+		return "Triangle";
+	}
+
+	Shape* clone() override {
+		return new Triangle(*this);
+	}
 };

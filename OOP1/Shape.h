@@ -17,7 +17,7 @@ protected:
 		return Point(x, y);
 	}
 public:
-	virtual void print() const = 0;  // заглушка
+	virtual void print() const = 0; 
 
 	virtual float calculateSquare() = 0;
 
@@ -27,4 +27,8 @@ public:
 	virtual Shape* loadFromFile(ifstream& file) = 0;
 
 	virtual Shape* inputFromConsole() = 0;
+
+	virtual string getType() const = 0;
+
+	virtual Shape* clone() = 0;
 };
