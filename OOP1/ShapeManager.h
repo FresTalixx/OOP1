@@ -51,6 +51,15 @@ public:
 	void writeToFile(string filename);
 	void loadFromFile(string filename);
 
+	friend ostream& operator<<(ostream& os, const ShapeManager& manager) {
+		for (int i = 0; i < manager.size; ++i) {
+			os << (i + 1) << ". ";
+			manager.shapes[i]->print(os);
+			os << "\n";
+		}
+		return os;
+	}
+
 	~ShapeManager();
 };
 

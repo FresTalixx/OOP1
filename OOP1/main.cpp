@@ -85,25 +85,28 @@ int main()
 
 			break;
 		case 2:
-			SetCursorPosition(15, 16); // valid offset
-			ShowConsoleCursor(true);
-			cout << "Enter an index of shape to delete: "; cin >> deleteIndex;
-			ShowConsoleCursor(false);
-
 			if ((activeManager == 1)) {
-				manager.printShapeArray();
+				cout << manager;
+				SetCursorPosition(25, 16); // valid offset
+				ShowConsoleCursor(true);
+				cout << "Enter an index of shape to delete: "; cin >> deleteIndex;
+				ShowConsoleCursor(false);
 				manager.deleteShape(deleteIndex - 1); // proper offset
 			}
 			else if ((activeManager == 2)) {
-				manager2.printShapeArray();
+				cout << manager2;
+				SetCursorPosition(15, 16); // valid offset
+				ShowConsoleCursor(true);
+				cout << "Enter an index of shape to delete: "; cin >> deleteIndex;
+				ShowConsoleCursor(false);
 				manager2.deleteShape(deleteIndex - 1); // proper offset
 			}
 			break;
 		case 3:
 			if ((activeManager == 1))
-				manager.printShapeArray();
+				cout << manager;
 			else if ((activeManager == 2))
-				manager2.printShapeArray();
+				cout << manager2;
 
 			ShowConsoleCursor(true);
 			cin.get();
