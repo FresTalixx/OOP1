@@ -29,11 +29,11 @@ float Triangle::calculateSquare() {
 	return sqrt(p * (p - a) * (p - b) * (p - c));
 }
 
-void Triangle::print() const {
-	cout << "Triangle: " << endl;
-	cout << "Point 1: " << point1.getX() << " " << point1.getY() << " " << endl;
-	cout << "Point 2: " << point2.getX() << " " << point2.getY() << " " << endl;
-	cout << "Point 3: " << point3.getX() << " " << point3.getY() << " " << endl;
+void Triangle::print(ostream& os) const {
+	os << "Triangle: " << endl;
+	os << "Point 1: " << point1.getX() << " " << point1.getY() << " " << endl;
+	os << "Point 2: " << point2.getX() << " " << point2.getY() << " " << endl;
+	os << "Point 3: " << point3.getX() << " " << point3.getY() << " " << endl;
 }
 
 Shape* Triangle::inputFromConsole() {

@@ -41,7 +41,7 @@ public:
 
 	float calculateSquare();
 
-	void print() const override;
+	void print(ostream& os) const override;
 
 	Shape* inputFromConsole();
 

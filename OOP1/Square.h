@@ -18,7 +18,7 @@ public:
 
 	float calculateSquare();
 
-	void print() const;
+	void print(ostream& os) const;
 
 	Shape* inputFromConsole();
 

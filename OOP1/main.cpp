@@ -54,6 +54,7 @@ int main()
 	bool running = true;
 	int activeManager = 1;
 
+
 	while (running) {
 		system("cls");
 		if (activeManager == 1) {
@@ -111,11 +112,11 @@ int main()
 		case 4:
 			if ((activeManager == 1)) {
 				maxSquareShape = manager.findShapeWithMaxSquare();
-				maxSquareShape->print();
+				maxSquareShape->print(cout);
 			}
 			else  if (activeManager == 2){
 				maxSquareShape = manager2.findShapeWithMaxSquare();
-				maxSquareShape->print();
+				maxSquareShape->print(cout);
 			}
 			
 			ShowConsoleCursor(true);
@@ -125,11 +126,11 @@ int main()
 		case 5:
 			if ((activeManager == 1)) {
 				maxPerimeterShape = manager.findShapeWithMaxPerimeter();
-				maxPerimeterShape->print();
+				maxPerimeterShape->print(cout);
 			}
 			else if ((activeManager == 2)){
 				maxPerimeterShape = manager2.findShapeWithMaxPerimeter();
-				maxPerimeterShape->print();
+				maxPerimeterShape->print(cout);
 			}
 			
 			ShowConsoleCursor(true);
@@ -140,11 +141,11 @@ int main()
 		case 6:
 			if ((activeManager == 1)) {
 				minSquareShape = manager.findShapeWithMinSquare();
-				minSquareShape->print();
+				minSquareShape->print(cout);
 			}
 			else if (activeManager == 2) {
 				minSquareShape = manager2.findShapeWithMinSquare();
-				minSquareShape->print();
+				minSquareShape->print(cout);
 			}
 			
 			ShowConsoleCursor(true);

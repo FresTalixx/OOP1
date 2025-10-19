@@ -18,10 +18,10 @@ float Circle::calculateSquare() {
 	return M_PI * radius * radius;
 }
 
-void Circle::print() const {
-	cout << "Circle: " << endl;
-	cout << "Center Point: " << centerPoint.getX() << " " << centerPoint.getY() << endl;
-	cout << "Circle Point: " << circlePoint.getX() << " " << circlePoint.getY() << endl;
+void Circle::print(ostream& os) const {
+	os << "Circle: " << endl;
+	os << "Center Point: " << centerPoint.getX() << " " << centerPoint.getY() << endl;
+	os << "Circle Point: " << circlePoint.getX() << " " << circlePoint.getY() << endl;
 }
 
 Shape* Circle::inputFromConsole() {

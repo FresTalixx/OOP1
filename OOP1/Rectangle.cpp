@@ -22,12 +22,12 @@ float MyRectangle::calculatePerimeter() {
 	return 2 * (right.getY() - left.getY() + right.getX() - left.getX());
 }
 
-void MyRectangle::print() const {
-	cout << "Rectangle: " << endl;
-	cout << "Left Bottom: " << left.getX() << " " << left.getY() << " " << endl;
-	cout << "Left Top: " << left.getX() << " " << right.getY() << " " << endl;
-	cout << "Right Top: " << right.getX() << " " << right.getY() << " " << endl;
-	cout << "Right Bottom: " << right.getX() << " " << left.getY() << " " << endl;
+void MyRectangle::print(ostream& os) const {
+	os << "Rectangle: " << endl;
+	os << "Left Bottom: " << left.getX() << " " << left.getY() << " " << endl;
+	os << "Left Top: " << left.getX() << " " << right.getY() << " " << endl;
+	os << "Right Top: " << right.getX() << " " << right.getY() << " " << endl;
+	os << "Right Bottom: " << right.getX() << " " << left.getY() << " " << endl;
 
 }
 

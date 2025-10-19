@@ -17,7 +17,7 @@ protected:
 		return Point(x, y);
 	}
 public:
-	virtual void print() const = 0; 
+	virtual void print(ostream& os) const = 0;
 
 	virtual float calculateSquare() = 0;
 
@@ -31,4 +31,35 @@ public:
 	virtual string getType() const = 0;
 
 	virtual Shape* clone() = 0;
+
+    bool operator>(Shape& otherShape) {
+        if (this->calculateSquare() > otherShape.calculateSquare()) return true;
+        return false;
+    }
+
+	bool operator==(Shape& otherShape) {
+		if (this->calculateSquare() == otherShape.calculateSquare()) return true;
+		return false;
+	}
+
+	bool operator!=(Shape& otherShape) {
+		return !(*this > otherShape);
+	}
+
+	bool operator>=(Shape& otherShape) {
+		return (*this > otherShape || *this == otherShape);
+	}
+
+	bool operator<=(Shape& otherShape) {
+		return !(*this > otherShape || *this == otherShape);
+	}
+
+	bool operator<(Shape& otherShape) {
+		return !(*this > otherShape || *this == otherShape);
+	}
+
+	friend ostream& operator<<(ostream& os, const Shape& shape) {
+		shape.print(os);
+		return os;
+	}
 };

@@ -20,12 +20,12 @@ float Square::calculateSquare() {
 	return side * side;
 }
 
-void Square::print() const {
-	cout << "Square: ";
-	cout << "Left Bottom: " << left.getX() << " " << left.getY() << " " << endl;
-	cout << "Left Top: " << left.getX() << " " << right.getY() << " " << endl;
-	cout << "Right Top: " << right.getX() << " " << right.getY() << " " << endl;
-	cout << "Right Bottom: " << right.getX() << " " << left.getY() << " " << endl;
+void Square::print(ostream& os) const {
+	os << "Square: ";
+	os << "Left Bottom: " << left.getX() << " " << left.getY() << " " << endl;
+	os << "Left Top: " << left.getX() << " " << right.getY() << " " << endl;
+	os << "Right Top: " << right.getX() << " " << right.getY() << " " << endl;
+	os << "Right Bottom: " << right.getX() << " " << left.getY() << " " << endl;
 }
 
 Shape* Square::inputFromConsole() {

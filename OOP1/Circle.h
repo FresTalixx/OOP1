@@ -18,7 +18,7 @@ public:
 
 	float calculateSquare();
 
-	void print() const;
+	void print(ostream& os) const;
 
 	Shape* inputFromConsole();
 
@@ -33,5 +33,7 @@ public:
 	Shape* clone() override {
 		return new Circle(*this);
 	}
+
+	
 };
 

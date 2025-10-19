@@ -70,7 +70,7 @@ void ShapeManager::deleteShape(int number) {
 void ShapeManager::printShapeArray() const {
 	for (int i = 0; i < size; i++) {
 		cout << i + 1 << " ";
-		shapes[i]->print();
+		shapes[i]->print(cout);
 		cout << "\n";
 	}
 }
